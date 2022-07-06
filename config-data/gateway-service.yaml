@@ -1,0 +1,41 @@
+server:
+  port: 8080
+eureka:
+  client:
+    fetch-registry: true
+    register-with-eureka: true
+    service-url:
+          defaultZone: http://${eureka.instance.hostname}:8761/eureka/
+    instance:
+        prefer-ip-address: true
+        hostname: localhost
+spring:
+  cloud:
+    gateway:
+        discovery:
+          locator:
+            enabled: true
+        routes:
+          - id: client-service
+            uri: lb://client-service
+            predicates:
+              - Path=/client/**
+          - id: typeclient-service
+            uri: lb://typeclient-service
+            predicates:
+              - Path=/typeClient/**
+          - id: bankaccount-service
+            uri: lb://bankaccount-service
+            predicates:
+              - Path=/account/**
+          - id: credit-service
+            uri: lb://credit-service
+            predicates:
+              - Path=/credit/**
+          - id: movement-service
+            uri: lb://movement-service
+            predicates:
+              - Path=/Movement/**
+    loadbalancer:
+        ribbon:
+          enabled: false
