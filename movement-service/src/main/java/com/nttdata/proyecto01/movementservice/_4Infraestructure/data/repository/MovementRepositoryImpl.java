@@ -63,7 +63,7 @@ public class MovementRepositoryImpl implements MovementRepository {
 
     @Override
     public Flux<MovementDto> getListMovementByIdClientAndIdTypeAndIdProductAndNumberCardAndcategory(String idClient, String idType, String idProduct, String numberCard, int category) {
-        return this._movementRepositoryMongoDB.findByIdClientAndIdTypeAndIdProductAndNumberCardAndcategory(idClient, idType, idProduct, numberCard, category);
+        return this._movementRepositoryMongoDB.findByIdClientAndIdTypeAndIdProductAndNumberCardAndCategory(idClient, idType, idProduct, numberCard, category);
     }
 
 }

@@ -15,6 +15,6 @@ public interface MovementRepositoryMongoDB extends ReactiveMongoRepository<Movem
 
   Flux<MovementDto> findByIdClientAndIdTypeAndIdProductAndNumberCard(String idClient, String idType, String idProduct, String numberCard);
 
-  Flux<MovementDto> findByIdClientAndIdTypeAndIdProductAndNumberCardAndcategory(String idClient, String idType, String idProduct, String numberCard, int category);
+  Flux<MovementDto> findByIdClientAndIdTypeAndIdProductAndNumberCardAndCategory(String idClient, String idType, String idProduct, String numberCard, int category);
 
 }
