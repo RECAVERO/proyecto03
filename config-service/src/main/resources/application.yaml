@@ -6,7 +6,7 @@ spring:
           server:
             git:
               default-label: config-data
-              uri: https://github.com/RECAVERO/proyecto01/
+              uri: https://github.com/RECAVERO/proyecto03/
               search-paths: config-data
   application:
     name: config-service
