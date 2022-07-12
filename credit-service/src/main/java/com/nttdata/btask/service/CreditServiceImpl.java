@@ -52,7 +52,7 @@ public class CreditServiceImpl implements CreditService {
   public Mono<ClientDto> getByIdClient(String idClient) {
     return this.webClientBuilder.build()
             .get()
-            .uri("http://localhost:5001/client/search/"+ idClient)
+            .uri("http://client-service:5001/client/search/"+ idClient)
             .retrieve()
             .bodyToMono(ClientDto.class);
   }
@@ -61,7 +61,7 @@ public class CreditServiceImpl implements CreditService {
   public Mono<TypeDto> getByIdType(String idType) {
     return this.webClientBuilder.build()
             .get()
-            .uri("http://localhost:5002/type/search/"+ idType)
+            .uri("http://type-service:5002/type/search/"+ idType)
             .retrieve()
             .bodyToMono(TypeDto.class);
   }
@@ -70,7 +70,7 @@ public class CreditServiceImpl implements CreditService {
   public Mono<AccountDto> getByIdAccount(String idAccount) {
     return this.webClientBuilder.build()
             .get()
-            .uri("http://localhost:5003/account/search/"+ idAccount)
+            .uri("http://account-service:5003/account/search/"+ idAccount)
             .retrieve()
             .bodyToMono(AccountDto.class);
   }
@@ -96,7 +96,7 @@ public class CreditServiceImpl implements CreditService {
     return clientDto.flatMap(client->{
       return this.webClientBuilder.build()
               .post()
-              .uri("http://localhost:5001/client")
+              .uri("http://client-service:5001/client")
               .body(Mono.just(client),ClientDto.class)
               .retrieve()
               .bodyToMono(ClientDto.class);
