@@ -5,8 +5,8 @@ spring:
     config:
       server:
         git:
-          default-label: circuit
-          uri: https://github.com/RECAVERO/consolidado/
+          default-label: config-docker
+          uri: https://github.com/RECAVERO/proyecto03/
           search-paths: config-data
   application:
     name: config-service
