@@ -5,7 +5,7 @@ spring:
     config:
       server:
         git:
-          default-label: main
+          default-label: config-docker
           uri: https://github.com/RECAVERO/proyecto03/
           search-paths: config-data
   application:
