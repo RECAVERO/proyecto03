@@ -115,7 +115,7 @@ public class CreditServiceImpl implements CreditService {
   }
 
   @Override
-  public Mono<CreditDto> getCreditByNumberCard(String NumberCard) {
+  public Flux<CreditDto> getCreditByNumberCard(String NumberCard) {
     return this.creditRepository.getCreditByNumberCard(NumberCard);
   }
 
@@ -123,6 +123,5 @@ public class CreditServiceImpl implements CreditService {
   public Mono<CreditDto> getCreditByNumberCardAndCategory(String numberCard, int category) {
     return this.creditRepository.getCreditByNumberCardAndCategory(numberCard, category);
   }
-
 
 }

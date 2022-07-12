@@ -287,7 +287,7 @@ public class MovementController {
     public Mono<ResponseDto> paymentMovement(@RequestBody Mono<MovementDto> movementDto){
         ResponseDto responseDto = new ResponseDto();
         return movementDto.flatMap(movement->{
-            return this.movementService.getCreditByIdNumberCard(movement.getNumberCard()).flatMap(credit->{
+            return this.movementService.getCreditByIdNumberCard(movement.getNumberCuent()).flatMap(credit->{
                 if(credit.getId() == null){
                     responseDto.setStatus(HttpStatus.NOT_FOUND.toString());
                     responseDto.setMessage("Not exits number card");

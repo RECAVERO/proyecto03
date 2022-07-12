@@ -372,7 +372,8 @@ public class CreditController {
   @PostMapping("/associate/account")
   public Flux<ResponseListDto> associateAccount(@RequestBody  Flux<CreditDto> requestDtoMono){
     ResponseListDto responseDto=new ResponseListDto();
-    CreditDto auxiliar=new CreditDto();
+    String codigo=UUID.randomUUID().toString();
+
     return requestDtoMono.flatMap(credit->{
       System.out.println(credit);
       return this.creditService.getByIdClientAndIdTypeAndIdAccountAndNumberCuent(credit.getIdClient(),credit.getIdType(),credit.getIdAccount(),credit.getNumberCuent()).flatMap(g->{
@@ -388,7 +389,7 @@ public class CreditController {
           creditDto.setIdType(g.getIdType());
           creditDto.setIdAccount(g.getIdAccount());
           creditDto.setNumberCuent(g.getNumberCuent());
-          creditDto.setNumberCard(UUID.randomUUID().toString());
+          creditDto.setNumberCard(codigo);
           creditDto.setBalance(g.getBalance());
           creditDto.setStatus(g.getStatus());
           creditDto.setCategory(credit.getCategory());
@@ -406,15 +407,13 @@ public class CreditController {
   }
 
 
-  @PostMapping("/associate/prueba")
-  public Mono<CreditDto> associateAccountww(@RequestBody  Mono<CreditDto> requestDtoMono){
-    ResponseListDto responseDto=new ResponseListDto();
-    CreditDto auxiliar=new CreditDto();
-    return requestDtoMono.flatMap(credit->{
-      System.out.println(credit);
-      return this.creditService.getByIdClientAndIdTypeAndIdAccountAndNumberCuent(credit.getIdClient(),credit.getIdType(),credit.getIdAccount(),credit.getNumberCuent());
+  @PostMapping("/associate/prueba/{numberCard}")
+  public Flux<CreditDto> associateAccountww(@PathVariable  String numberCard){
 
-    });
+
+      return this.creditService.getCreditByNumberCard(numberCard);
+
+
   }
 
   private Mono<ResponseListDto> updateCardDebit(Mono<CreditDto> creditDto, String id){
@@ -439,9 +438,14 @@ public class CreditController {
   }
 
   @GetMapping("/search/{numberCard}")
-  public Mono<CreditDto> getCreditByIdNumberCard(@PathVariable String numberCard){
+  public Flux<CreditDto> getCreditByIdNumberCard(@PathVariable String numberCard){
     return this.creditService.getCreditByNumberCard(numberCard);
   }
+  @GetMapping("/search/card/{numberCuent}")
+  public Mono<CreditDto> getCreditByIdNumberCuent(@PathVariable String numberCuent){
+    return this.creditService.getCreditByNumberCuent(numberCuent);
+  }
+
 
   @GetMapping("/search/balance/mainAccount")
   public Mono<ResponseDto> getBalanceMainAccount(@RequestBody Mono<CreditDto> creditDto){

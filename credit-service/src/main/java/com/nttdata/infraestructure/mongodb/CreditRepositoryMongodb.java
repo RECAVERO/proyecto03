@@ -16,8 +16,10 @@ public interface CreditRepositoryMongodb extends ReactiveMongoRepository<Credit,
 
     Flux<CreditDto> findByIdClientAndIdTypeAndIdAccountAndCreationDateBetween(String idClient, String idType, String idAccount, String dateStart, String dateEnd);
 
-    Mono<CreditDto> findByNumberCard(String numberCard);
+    Flux<CreditDto> findByNumberCard(String numberCard);
 
     Mono<CreditDto> findByNumberCardAndCategory(String numberCard, int category);
+
+
 
 }

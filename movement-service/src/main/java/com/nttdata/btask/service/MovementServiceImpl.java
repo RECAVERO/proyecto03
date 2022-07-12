@@ -123,9 +123,9 @@ public class MovementServiceImpl implements MovementService {
             .bodyToFlux(CreditDto.class);
     }
     @Override
-    public Mono<CreditDto> getCreditByIdNumberCard(String numberCard) {
+    public Mono<CreditDto> getCreditByIdNumberCard(String numberCuent) {
         return webClientBuilder.build()
-            .get().uri("http://localhost:5004/credit/search/"+ numberCard)
+            .get().uri("http://localhost:5004/credit/search/card/"+ numberCuent)
             .retrieve()
             .bodyToMono(CreditDto.class);
     }

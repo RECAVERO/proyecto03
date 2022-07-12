@@ -74,7 +74,7 @@ public class CreditRepositoryImpl implements CreditRepository {
   }
 
   @Override
-  public Mono<CreditDto> getCreditByNumberCard(String NumberCard) {
+  public Flux<CreditDto> getCreditByNumberCard(String NumberCard) {
     return this.creditRepositoryMongodb.findByNumberCard(NumberCard).defaultIfEmpty(new CreditDto());
   }
 
@@ -82,6 +82,7 @@ public class CreditRepositoryImpl implements CreditRepository {
   public Mono<CreditDto> getCreditByNumberCardAndCategory(String numberCard, int category) {
     return this.creditRepositoryMongodb.findByNumberCardAndCategory(numberCard, category);
   }
+
 
 
 }

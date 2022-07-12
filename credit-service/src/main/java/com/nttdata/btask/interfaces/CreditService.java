@@ -32,7 +32,8 @@ public interface CreditService {
   Flux<CreditDto> getCreditByIdClient(String idClient);
 
   Flux<CreditDto> getCreditByIdClientAndIdTypeAndIdProductAndCreationDateBetween(String idClient, String idType, String idAccount, String dateStart, String dateEnd);
-  Mono<CreditDto> getCreditByNumberCard(String NumberCard);
+  Flux<CreditDto> getCreditByNumberCard(String NumberCard);
 
   Mono<CreditDto> getCreditByNumberCardAndCategory(String numberCard, int category);
+
 }
