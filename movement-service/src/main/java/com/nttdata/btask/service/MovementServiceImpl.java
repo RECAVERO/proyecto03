@@ -47,7 +47,7 @@ public class MovementServiceImpl implements MovementService {
     public Mono<CreditDto> getCredit(String idClient, String idType, String idAccount, String numberCuent) {
         return this.webClientBuilder.build()
                 .get()
-                .uri("http://localhost:5004/credit/product/"+ idClient + "/" + idType + "/" + idAccount + "/" + numberCuent )
+                .uri("http://credit-service:5004/credit/product/"+ idClient + "/" + idType + "/" + idAccount + "/" + numberCuent )
                 .retrieve()
                 .bodyToMono(CreditDto.class);
     }
@@ -57,7 +57,7 @@ public class MovementServiceImpl implements MovementService {
         return  creditDto.flatMap(c->{
             return this.webClientBuilder.build()
                     .post()
-                    .uri("http://localhost:5004/credit/deposit")
+                    .uri("http://credit-service:5004/credit/deposit")
                     .body(Mono.just(c), CreditDto.class)
                     .retrieve()
                     .bodyToMono(CreditDto.class);
@@ -69,7 +69,7 @@ public class MovementServiceImpl implements MovementService {
         return  creditDto.flatMap(c->{
             return this.webClientBuilder.build()
                     .post()
-                    .uri("http://localhost:5004/credit/withdrawal")
+                    .uri("http://credit-service:5004/credit/withdrawal")
                     .body(Mono.just(c), CreditDto.class)
                     .retrieve()
                     .bodyToMono(CreditDto.class);
@@ -86,7 +86,7 @@ public class MovementServiceImpl implements MovementService {
 
             return this.webClientBuilder.build()
                     .get()
-                    .uri("http://localhost:5001/client/search/"+ idClient)
+                    .uri("http://client-service:5001/client/search/"+ idClient)
                     .retrieve()
                     .bodyToMono(ClientDto.class);
 
@@ -96,7 +96,7 @@ public class MovementServiceImpl implements MovementService {
     public Mono<TypeDto> getByIdType(String idType) {
         return this.webClientBuilder.build()
                 .get()
-                .uri("http://localhost:5002/type/search/"+ idType)
+                .uri("http://type-service:5002/type/search/"+ idType)
                 .retrieve()
                 .bodyToMono(TypeDto.class);
     }
@@ -105,7 +105,7 @@ public class MovementServiceImpl implements MovementService {
     public Mono<AccountDto> getByIdAccount(String idAccount) {
         return this.webClientBuilder.build()
                 .get()
-                .uri("http://localhost:5003/account/search/"+ idAccount)
+                .uri("http://account-service:5003/account/search/"+ idAccount)
                 .retrieve()
                 .bodyToMono(AccountDto.class);
     }
@@ -118,14 +118,14 @@ public class MovementServiceImpl implements MovementService {
     @Override
     public Flux<CreditDto> getListCreditByIdClientAndIdTypeAndIdAccountAndCreationDateBetween(String idClient, String idType, String idAccount, String dateStart, String dateEnd) {
         return webClientBuilder.build()
-            .get().uri("http://localhost:5004/credit/products/"+ idClient +"/"+idType +"/"+idAccount +"/"+ dateStart +"/"+ dateEnd)
+            .get().uri("http://credit-service:5004/credit/products/"+ idClient +"/"+idType +"/"+idAccount +"/"+ dateStart +"/"+ dateEnd)
             .retrieve()
             .bodyToFlux(CreditDto.class);
     }
     @Override
     public Mono<CreditDto> getCreditByIdNumberCard(String numberCuent) {
         return webClientBuilder.build()
-            .get().uri("http://localhost:5004/credit/search/card/"+ numberCuent)
+            .get().uri("http://credit-service:5004/credit/search/card/"+ numberCuent)
             .retrieve()
             .bodyToMono(CreditDto.class);
     }
